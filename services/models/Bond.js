@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-
 var mongoConnect = require('./mongoConnect');
 
 var bondSchema = new mongoose.Schema(
@@ -11,5 +10,6 @@ var bondSchema = new mongoose.Schema(
   },
   { collection: 'bonds' }
 );
+
 
 module.exports = mongoose.model('Bond', bondSchema);
