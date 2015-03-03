@@ -27,7 +27,8 @@ module.exports = function(app) {
         console.log('Error getting Bond from database: ' + error);
         response.status(500).json({ error: 'Error getting Bond from database: ' + error });
       } else {
-		response.json(bond);
+        if (bond===null) { response.json({}); } 
+        else             { response.json(bond); }
       } 
     });
   });
