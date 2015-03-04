@@ -1,27 +1,34 @@
-<div class="container" ng-show="showSettings">
+<div ng-show="showSettings">
  
   <label>Your names</label>
 
   <div class="form-group">
-    <input id="name1" type="text" class="form-control" ng-model="bond.name1" ng-change="saveButtonDisabled = false;" />
+    <input id="name1" type="text" class="form-control" ng-model="bond.name1" 
+           ng-change="showSaveButton = true; showSaveSuccess = false;" />
   </div>
 
   <div class="form-group">
-    <input id="name2" type="text" class="form-control" ng-model="bond.name2" ng-change="saveButtonDisabled = false;" />
+    <input id="name2" type="text" class="form-control" ng-model="bond.name2" 
+           ng-change="showSaveButton = true; showSaveSuccess = false;" />
   </div>
 
   <div class="form-group">
     <label for="phoneNumber1">{{bond.name1}}'s phone number</label>
-    <input id="phoneNumber1" type="number" class="form-control" ng-model="bond.phoneNumber1" 
-           ng-change="saveButtonDisabled = false;" />
+    <input id="phoneNumber1" type="text" class="form-control" ng-model="bond.phoneNumber1" 
+           ng-change="showSaveButton = true; showSaveSuccess = false;" />
   </div>
 
   <div class="form-group">
     <label for="phoneNumber2">{{bond.name2}}'s phone number</label>
-    <input id="phoneNumber2" type="number" class="form-control" ng-model="bond.phoneNumber2" 
-           ng-change="saveButtonDisabled = false;" />
+    <input id="phoneNumber2" type="text" class="form-control" ng-model="bond.phoneNumber2" 
+           ng-change="showSaveButton = true; showSaveSuccess = false;" />
   </div>
 
-  <button type="button" class="btn btn-primary" ng-click="saveBond()" ng-disabled="saveButtonDisabled">Save</button>
+  <button type="button" class="btn btn-primary" ng-click="saveBond()" ng-show="showSaveButton">Save</button>
+
+  <div class="glyphicon glyphicon-refresh glyphicon-refresh-animate" ng-show="showLoadingIcon"></div>
+
+  <div class="alert alert-success" role="alert" ng-show="showSaveSuccess">Saved!</div>
 
 </div>
+

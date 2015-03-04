@@ -3,7 +3,9 @@ var settingsModule = angular.module('settingsModule', []);
 settingsModule.controller('SettingsController', ['$scope', '$location', '$http', function ($scope, $location, $http) {
 
   $scope.showSettings = false;
-  $scope.saveButtonDisabled = true;
+  $scope.showSaveButton = false;
+  $scope.showLoading = false;
+  $scope.showSaveSuccess = false;
 
   $scope.id = $location.search().id;
 
@@ -12,17 +14,22 @@ settingsModule.controller('SettingsController', ['$scope', '$location', '$http',
       console.log('Error getting Bond with id: ' + $scope.id);
     })
     .success(function (data, status, headers, config) {
-      $scope.bond = deserializeBondJson(data)
+      $scope.bond = data
       $scope.showSettings = true;
     });
 
-}]);
+  $scope.saveBond = function () {
+    $scope.showSaveButton = false;
+    $scope.showLoadingIcon = true;
 
-function deserializeBondJson(bondJson) {
-  var bond = {};
-  bond.name1 = bondJson.name1;
-  bond.name2 = bondJson.name2;
-  bond.phoneNumber1 = parseInt(bondJson.phoneNumber1);
-  bond.phoneNumber2 = parseInt(bondJson.phoneNumber2);
-  return bond;
-}
+    $http.put('/api/bonds/' + $scope.id, $scope.bond)
+      .error(function (data, status, headers, config) {
+        console.log('Error getting Bond with id: ' + $scope.id);
+      })
+      .success(function (data, status, headers, config) {
+        $scope.showLoadingIcon = false;
+        $scope.showSaveSuccess = true;
+      });
+  }
+
+}]);
