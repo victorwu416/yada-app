@@ -1,1 +1,27 @@
-<h1>Settings</h1>
+<div class="container" ng-show="showSettings">
+ 
+  <label>Your names</label>
+
+  <div class="form-group">
+    <input id="name1" type="text" class="form-control" ng-model="bond.name1" ng-change="saveButtonDisabled = false;" />
+  </div>
+
+  <div class="form-group">
+    <input id="name2" type="text" class="form-control" ng-model="bond.name2" ng-change="saveButtonDisabled = false;" />
+  </div>
+
+  <div class="form-group">
+    <label for="phoneNumber1">{{bond.name1}}'s phone number</label>
+    <input id="phoneNumber1" type="number" class="form-control" ng-model="bond.phoneNumber1" 
+           ng-change="saveButtonDisabled = false;" />
+  </div>
+
+  <div class="form-group">
+    <label for="phoneNumber2">{{bond.name2}}'s phone number</label>
+    <input id="phoneNumber2" type="number" class="form-control" ng-model="bond.phoneNumber2" 
+           ng-change="saveButtonDisabled = false;" />
+  </div>
+
+  <button type="button" class="btn btn-primary" ng-click="saveBond()" ng-disabled="saveButtonDisabled">Save</button>
+
+</div>
