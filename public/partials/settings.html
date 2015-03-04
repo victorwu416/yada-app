@@ -3,25 +3,25 @@
   <label>Your names</label>
 
   <div class="form-group">
-    <input id="name1" type="text" class="form-control" ng-model="bond.name1" 
-           ng-change="showSaveButton = true; showSaveSuccess = false;" />
+    <input id="name1" type="text" class="form-control" ng-model="bond.name1" ng-class="inputBackground"
+           ng-click="showSaveButton = true; showSaveSuccess = false; inputBackground = 'input-changing'" />
   </div>
 
   <div class="form-group">
-    <input id="name2" type="text" class="form-control" ng-model="bond.name2" 
-           ng-change="showSaveButton = true; showSaveSuccess = false;" />
+    <input id="name2" type="text" class="form-control" ng-model="bond.name2" ng-class="inputBackground"
+           ng-click="showSaveButton = true; showSaveSuccess = false; inputBackground = 'input-changing'" />
   </div>
 
   <div class="form-group">
     <label for="phoneNumber1">{{bond.name1}}'s phone number</label>
-    <input id="phoneNumber1" type="text" class="form-control" ng-model="bond.phoneNumber1" 
-           ng-change="showSaveButton = true; showSaveSuccess = false;" />
+    <input id="phoneNumber1" type="text" class="form-control" ng-model="bond.phoneNumber1" ng-class="inputBackground" 
+           ng-click="showSaveButton = true; showSaveSuccess = false; inputBackground = 'input-changing'" />
   </div>
 
   <div class="form-group">
     <label for="phoneNumber2">{{bond.name2}}'s phone number</label>
-    <input id="phoneNumber2" type="text" class="form-control" ng-model="bond.phoneNumber2" 
-           ng-change="showSaveButton = true; showSaveSuccess = false;" />
+    <input id="phoneNumber2" type="text" class="form-control" ng-model="bond.phoneNumber2" ng-class="inputBackground"
+           ng-click="showSaveButton = true; showSaveSuccess = false; inputBackground = 'input-changing'" />
   </div>
 
   <button type="button" class="btn btn-primary" ng-click="saveBond()" ng-show="showSaveButton">Save</button>

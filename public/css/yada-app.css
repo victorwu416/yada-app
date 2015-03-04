@@ -19,3 +19,8 @@
   from { -moz-transform: rotate(0deg);}
   to { -moz-transform: rotate(360deg);}
 }
+
+
+.input-changing {
+  background-color: AliceBlue;
+}

@@ -3,6 +3,7 @@ var settingsModule = angular.module('settingsModule', []);
 settingsModule.controller('SettingsController', ['$scope', '$location', '$http', function ($scope, $location, $http) {
 
   $scope.showSettings = false;
+  $scope.inputBackground = '';
   $scope.showSaveButton = false;
   $scope.showLoading = false;
   $scope.showSaveSuccess = false;
@@ -29,6 +30,7 @@ settingsModule.controller('SettingsController', ['$scope', '$location', '$http',
       .success(function (data, status, headers, config) {
         $scope.showLoadingIcon = false;
         $scope.showSaveSuccess = true;
+        $scope.inputBackground = '';
       });
   }
 
