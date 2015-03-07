@@ -1,61 +1,71 @@
 <div ng-show="showSettings">
  
-  <label>Your names</label>
-
-  <div class="form-group">
-    <input id="name1" type="text" class="form-control" ng-class="inputBackground" 
-           ng-model="bond.name1"  ng-click="changeToDirty();" />
-  </div>
-
-  <div class="form-group">
-    <input id="name2" type="text" class="form-control" ng-class="inputBackground" 
-           ng-model="bond.name2"  ng-click="changeToDirty();" />  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading"><span>Your names</span></div>
+    <div class="panel-body">
+      <div class="input-group">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+        <input id="name1" type="text" class="form-control" ng-class="inputBackground" 
+               ng-model="bond.name1" ng-click="changeToDirty();" />
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+        <input id="name2" type="text" class="form-control" ng-class="inputBackground" 
+               ng-model="bond.name2" ng-click="changeToDirty();" />
+      </div>
+    </div> <!-- panel-body -->
+  </div> <!-- panel -->
 
   <div class="panel panel-default">
-    <div class="panel-heading"><span><label>{{bond.name1}}'s</label> weekday SMS reminder</span></div>
+    <div class="panel-heading">
+      <span class="glyphicon glyphicon-time"></span> 
+      <span><label>{{bond.name1}}'s</label> weekday SMS reminder</span>
+    </div>
     <div class="panel-body">
-
       <div class="input-group">
-        <span class="input-group-addon"><span class="glyphicon glyphicon-earphone"></span></span>
+        <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
         <input id="phoneNumber1" type="text" class="form-control" ng-class="inputBackground" ui-mask="(999) 999-9999"
                ng-model="bond.phoneNumber1" ng-click="changeToDirty();" />
       </div>
-
-      <div class="btn-group sms-reminder-btn-group" ng-click="changeToDirty();">
-          <label class="btn btn-default" ng-model="bond.smsTime1" btn-radio="0">2:00pm</label>
-          <label class="btn btn-default" ng-model="bond.smsTime1" btn-radio="1">2:30pm</label>
-          <label class="btn btn-default" ng-model="bond.smsTime1" btn-radio="2">3:00pm</label>
-          <label class="btn btn-default" ng-model="bond.smsTime1" btn-radio="3">3:30pm</label>
+      <div class="btn-group input-group" ng-click="changeToDirty();">
+        <label class="btn btn-default" ng-model="bond.smsTime1" btn-radio="0">2:00pm</label>
+        <label class="btn btn-default" ng-model="bond.smsTime1" btn-radio="1">2:30pm</label>
+        <label class="btn btn-default" ng-model="bond.smsTime1" btn-radio="2">3:00pm</label>
+        <label class="btn btn-default" ng-model="bond.smsTime1" btn-radio="3">3:30pm</label>
       </div>
-
     </div> <!-- panel-body -->
   </div> <!-- panel -->
 
-  <div class="panel panel-default" ng-click="changeToDirty();">
-    <div class="panel-heading"><span><label>{{bond.name2}}'s</label> weekday SMS reminder</span></div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <span class="glyphicon glyphicon-time"></span> 
+      <span><label>{{bond.name2}}'s</label> weekday SMS reminder</span>
+    </div>
     <div class="panel-body">
-
       <div class="input-group">
-        <span class="input-group-addon"><span class="glyphicon glyphicon-earphone"></span></span>
+        <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
         <input id="phoneNumber2" type="text" class="form-control" ng-class="inputBackground" ui-mask="(999) 999-9999"
                ng-model="bond.phoneNumber2" ng-click="changeToDirty();" />
       </div>
-
-      <div class="btn-group sms-reminder-btn-group">
-          <label class="btn btn-default" ng-model="bond.smsTime2" btn-radio="0">2:00pm</label>
-          <label class="btn btn-default" ng-model="bond.smsTime2" btn-radio="1">2:30pm</label>
-          <label class="btn btn-default" ng-model="bond.smsTime2" btn-radio="2">3:00pm</label>
-          <label class="btn btn-default" ng-model="bond.smsTime2" btn-radio="3">3:30pm</label>
+      <div class="btn-group input-group" ng-click="changeToDirty();">
+        <label class="btn btn-default" ng-model="bond.smsTime2" btn-radio="0">2:00pm</label>
+        <label class="btn btn-default" ng-model="bond.smsTime2" btn-radio="1">2:30pm</label>
+        <label class="btn btn-default" ng-model="bond.smsTime2" btn-radio="2">3:00pm</label>
+        <label class="btn btn-default" ng-model="bond.smsTime2" btn-radio="3">3:30pm</label>
       </div>
 
     </div> <!-- panel-body -->
   </div> <!-- panel -->
 
-  <button type="button" class="btn btn-primary" ng-click="saveBond()" ng-show="showSaveButton">Save</button>
+  <button type="button" class="btn btn-primary" ng-click="saveBond()" ng-show="showSaveButton">
+    <span class="glyphicon glyphicon-floppy-disk"></span> Save
+  </button>
 
-  <div class="glyphicon glyphicon-refresh glyphicon-refresh-animate" ng-show="showLoadingIcon"></div>
+  <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" ng-show="showLoadingIcon"></span>
 
-  <alert type="success" ng-show="showSaveSuccess" close="showSaveSuccess = false;">Saved!</alert>
+  <alert type="success" ng-show="showSaveSuccess" close="showSaveSuccess = false;">
+    <span class="glyphicon glyphicon-floppy-saved"></span> Saved!
+  </alert>
 
 </div>
 

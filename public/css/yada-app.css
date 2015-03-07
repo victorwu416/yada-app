@@ -1,4 +1,8 @@
-.sms-reminder-btn-group {
+.sms-time-btn-group {
+  margin: 10px 0 0 0;
+}
+
+.panel-body .input-group + .input-group {
   margin: 10px 0 0 0;
 }
 
