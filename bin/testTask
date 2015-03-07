@@ -1,3 +1,57 @@
 #!/usr/bin/env node
 
 console.log('This is the test task running!');
+
+var path = require('path');
+
+var blah = path.join('/hello', '/public');
+
+console.log('blah is ' + blah);
+
+
+
+
+var Bond = require('../services/models/Bond');
+
+
+Bond.find().exec(function (error, bonds) {      
+  if (error) {
+    console.log('Error getting Bonds from database: ' + error);
+  } else {
+    console.log('length is ' + bonds.length);
+
+
+  var accountSid = 'AC12b8753775aa56a229fc318f03f82eea';
+  var authToken = '307fcf54cd3fa3ed76c862b026c71a10';
+  var client = require('twilio')(accountSid, authToken);
+
+  var phoneNumber = '3129181928';
+
+  client.sms.messages.create({
+    body: 'hello from test task!',
+    to: phoneNumber,
+    from: '+15039255863'
+
+  }, function(error, message) {
+	if (error) {
+	  console.log('Error sending SMS');
+ 	} else {
+      console.log('SMS sent');
+    }
+  });
+
+
+
+
+
+
+    Bond.connection.close();
+  } 
+});
+
+
+
+
+console.log('This is the test task running!');
+
+

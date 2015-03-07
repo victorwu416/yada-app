@@ -1,3 +1,12 @@
+.sms-reminder-btn-group {
+  margin: 10px 0 0 0;
+}
+
+.input-dirty {
+  background-color: AliceBlue;
+}
+
+
 .glyphicon-refresh-animate {
   -animation: spin .7s infinite linear;
   -ms-animation: spin .7s infinite linear;
@@ -21,6 +30,4 @@
 }
 
 
-.input-changing {
-  background-color: AliceBlue;
-}
+

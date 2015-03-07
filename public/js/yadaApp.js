@@ -1,4 +1,4 @@
-var yadaApp = angular.module('yadaApp', ['ui.router', 'mainModule', 'settingsModule']);
+var yadaApp = angular.module('yadaApp', ['ui.bootstrap', 'ui.router', 'mainModule', 'settingsModule']);
 
 yadaApp.config(function($stateProvider, $urlRouterProvider) {
 
