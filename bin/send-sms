@@ -16,10 +16,8 @@ function shouldSendSmsNow(now, smsTime, lastSmsSent) {
   nowChicago = moment.tz(now.toISOString(), 'America/Chicago');
 
   // If Sunday or Saturday, do not send
-/*
   if (nowChicago.day() == 0) { return false; }
   if (nowChicago.day() == 6) { return false; }
-*/
 
   var nowChicagoTodayMinutes = (nowChicago.hour() * 60) + nowChicago.minute();
 
