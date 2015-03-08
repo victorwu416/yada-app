@@ -40,11 +40,6 @@ Bond.find().exec(function (error, bonds) {
     }
   });
 
-
-
-
-
-
     Bond.connection.close();
   } 
 });

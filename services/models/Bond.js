@@ -8,7 +8,9 @@ var bondSchema = new mongoose.Schema(
     phoneNumber1: String,
     phoneNumber2: String,
     smsTime1: Number,
-    smsTime2: Number
+    smsTime2: Number,
+    lastSmsSent1: Date,
+    lastSmsSent2: Date
   },
   { collection: 'bonds' }
 );
