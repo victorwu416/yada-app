@@ -13,7 +13,9 @@ function shouldSendSmsNow(now, smsTime, lastSmsSent) {
 //  if (now.getDay() == 6) { return false; }
 
   var nowTodayMinutes = (now.getHours() * 60) + now.getMinutes();
-  
+
+console.log('nowTodayMinutes is ' + nowTodayMinutes);  
+
   var smsTimeTodayMinutes = 0;
   if (smsTime === 0) {
     smsTimeTodayMinutes = 14 * 60;
@@ -25,13 +27,19 @@ function shouldSendSmsNow(now, smsTime, lastSmsSent) {
     smsTimeTodayMinutes = 15.5 * 60;
   }
 
+console.log('smsTimeTodayMinutes is ' + smsTimeTodayMinutes);
+
   // Have not reached the time to send SMS today yet, so do not send
   if (nowTodayMinutes < smsTimeTodayMinutes) { return false; }
   
+console.log('Not returned 123');
+
   // Have reached the time to send SMS, so if last time sending was before today, then do send
   if (lastSmsSent.getFullYear() < now.getFullYear()) { return true; }
   if (lastSmsSent.getMonth() < now.getMonth()) { return true; }
   if (lastSmsSent.getDay() < now.getDay()) { return true; }
+
+console.log('Not returned 456');
 
   return false;
 }
@@ -92,13 +100,11 @@ Bond.find().exec(function (error, bonds) {
         });
       }
       changedBonds.push(bond);
-    });
+    }); // bonds.forEach
 
     async.parallel(sendSmsAsyncTasks, function () {
-
       var savedCount = 0;
       changedBonds.forEach(function (changedBond) {
-
         Bond.findByIdAndUpdate(changedBond._id, changedBond, function () {
           savedCount++;
           if (savedCount >= changedBonds.length) {
@@ -106,9 +112,9 @@ Bond.find().exec(function (error, bonds) {
             console.log('Finished scheduled task: Send SMS reminders');	
           }
         });
+      }); // changedBonds.forEach
+    }); // async.parallel
 
-      });
-    });    
-  }
-});
+  } // else
+}); // Bond.find().exec
 
