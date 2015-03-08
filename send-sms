@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-console.log('Begin scheduled task: Send SMS reminders');
-
 async = require("async");
 var moment = require('moment-timezone');
 
@@ -69,6 +67,7 @@ function sendSms(phoneNumber, name, callback) {
   });
 }
 
+console.log('Begin scheduled task: Send SMS reminders');
 Bond.find().exec(function (error, bonds) {
   if (error) {
     console.log('Error getting Bonds from database: ' + error);
