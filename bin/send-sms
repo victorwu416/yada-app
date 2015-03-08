@@ -1,20 +1,29 @@
 #!/usr/bin/env node
 
+//  node bin/send-sms
+
 async = require("async");
+var moment = require('moment-timezone');
+
 var Bond = require('../services/models/Bond');
+
+
 
 var accountSid = 'AC12b8753775aa56a229fc318f03f82eea';
 var authToken = '307fcf54cd3fa3ed76c862b026c71a10';
 var client = require('twilio')(accountSid, authToken);
 
 function shouldSendSmsNow(now, smsTime, lastSmsSent) {
-  // If not a weekday, do not send
-//  if (now.getDay() == 0) { return false; }
-//  if (now.getDay() == 6) { return false; }
 
-  var nowTodayMinutes = (now.getHours() * 60) + now.getMinutes();
+  nowChicago = moment.tz(now.toISOString(), 'America/Chicago');
 
-console.log('nowTodayMinutes is ' + nowTodayMinutes);  
+  // If Sunday or Saturday, do not send
+/*
+  if (nowChicago.day() == 0) { return false; }
+  if (nowChicago.day() == 6) { return false; }
+*/
+
+  var nowChicagoTodayMinutes = (nowChicago.hour() * 60) + nowChicago.minute();
 
   var smsTimeTodayMinutes = 0;
   if (smsTime === 0) {
@@ -27,19 +36,13 @@ console.log('nowTodayMinutes is ' + nowTodayMinutes);
     smsTimeTodayMinutes = 15.5 * 60;
   }
 
-console.log('smsTimeTodayMinutes is ' + smsTimeTodayMinutes);
-
   // Have not reached the time to send SMS today yet, so do not send
-  if (nowTodayMinutes < smsTimeTodayMinutes) { return false; }
+  if (nowChicagoTodayMinutes < smsTimeTodayMinutes) { return false; }
   
-console.log('Not returned 123');
-
   // Have reached the time to send SMS, so if last time sending was before today, then do send
-  if (lastSmsSent.getFullYear() < now.getFullYear()) { return true; }
-  if (lastSmsSent.getMonth() < now.getMonth()) { return true; }
-  if (lastSmsSent.getDay() < now.getDay()) { return true; }
-
-console.log('Not returned 456');
+  lastSmsSentChicago = moment.tz(lastSmsSent.toISOString(), 'America/Chicago');
+  if (lastSmsSentChicago.year() < nowChicago.year()) { return true; }
+  if (lastSmsSentChicago.dayOfYear() < nowChicago.dayOfYear()) { return true; }
 
   return false;
 }
