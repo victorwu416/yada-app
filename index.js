@@ -1,8 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-
 var path = require('path');
-
 
 
 var app = express();
@@ -15,10 +13,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 
-
 var bond = require('./services/bond')(app);
 
 
 app.listen(app.get('port'), function() {
-  console.log("yada-app is running at localhost:" + app.get('port'));
+  console.log("yada-app is running on port:" + app.get('port'));
 });
