@@ -46,8 +46,8 @@ function shouldSendSmsNow(now, smsTime, lastSmsSent) {
 function sendSms(phoneNumber, name, callback) {
 
   var bodies = [
-    'Work is important. But so is ' + name + '! Send a message or make a call as your day wraps up =)',
-    'Whew! What a crazy day. Let ' + name + ' know when you\'re getting off work',
+    'Work is important. But so is ' + name + '! Send a message as your day wraps up',
+    'Today is CRAZY. Let ' + name + ' know when you\'re getting off work',
     'Wow! Time flies. Don\'t forget about ' + name + ' as you get outta here',
   ];
   var bodyMessage = bodies[Math.floor((Math.random() * 3))];
