@@ -1,14 +1,23 @@
-.sms-time-btn-group {
+.input-dirty {
+  background-color: AliceBlue;
+}
+
+/* lists */
+.panel-body .ng-scope + .ng-scope .input-group {
   margin: 10px 0 0 0;
 }
 
+/* settings */
 .panel-body .input-group + .input-group {
   margin: 10px 0 0 0;
 }
 
-.input-dirty {
-  background-color: AliceBlue;
+.sms-time-btn-group {
+  margin: 10px 0 0 0;
 }
+
+
+
 
 
 .glyphicon-refresh-animate {

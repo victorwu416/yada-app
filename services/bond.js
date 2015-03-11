@@ -1,13 +1,10 @@
 var Bond = require('./models/Bond');
-var path = require('path');
-
-var restUrlPrefix = '/api/bonds';
 
 module.exports = function(app) {
 
-  app.get(path.join(restUrlPrefix, '/:id'), function(request, response) {
+  app.get('/api/bonds/:id', function(request, response) {
     var id = request.params.id;
-    Bond.findById(id).exec(function (error, bond) {      
+    Bond.findById(id, function (error, bond) {      
       if (error) {
         console.log('Error getting Bond with id ' + id + ' from database: ' + error);
         response.status(500).json({ error: 'Error getting Bond with id ' + id + ' from database: ' + error });
@@ -19,10 +16,9 @@ module.exports = function(app) {
   });
 
 
-  app.put(path.join(restUrlPrefix, '/:id'), function(request, response) {
+  app.put('/api/bonds/:id', function(request, response) {
     var id = request.params.id;
-    var newBond = request.body;
-    Bond.findByIdAndUpdate(id, newBond).exec(function (error, updatedBond) {      
+    Bond.findByIdAndUpdate(id, request.body, function (error, updatedBond) {      
       if (error) {
         console.log('Error getting Bond with id ' + id + ' from database: ' + error);
         response.status(500).json({ error: 'Error getting Bond with id ' + id + ' from database: ' + error });

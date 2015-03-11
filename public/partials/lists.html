@@ -1,1 +1,22 @@
-Lists HTML
+<div ng-show="true">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading"><span>Your items</span></div>
+    <div class="panel-body">
+    
+      <div ng-repeat="item in items">
+        <div class="input-group">
+          <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+          <input type="text" class="form-control" ng-class="inputBackground" 
+                 ng-model="item.description" />
+        </div>
+      </div>
+
+    </div> <!-- panel-body -->
+  </div> <!-- panel -->
+
+  <button type="button" class="btn btn-primary" ng-click="saveList()" ng-show="true">
+    <span class="glyphicon glyphicon-floppy-disk"></span> Save
+  </button>
+
+</div>
