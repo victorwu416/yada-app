@@ -1,5 +1,5 @@
 var Item = require('./models/Item');
-var async = require("async");
+var async = require('async');
 
 module.exports = function(app) {
 
@@ -14,33 +14,6 @@ module.exports = function(app) {
       } 
     });
   });
-
-
-  app.post('/api/items', function (request, response) {
-    var newItem = new Item(request.body);
-    newItem.save(function (error, newItem) {
-      if (error) {
-        console.log('Error inserting new Item into database: ' + error);
-        response.status(500).json({ error: 'Error inserting new Item into database: ' + error });
-      } else {
-        response.json(newItem);
-      } 
-    });
-  });
-
-/*
-  app.put('/api/items/:id', function(request, response) {
-    var id = request.params.id;
-    Item.findByIdAndUpdate(id, request.body, function (error, updatedItem) {      
-      if (error) {
-        console.log('Error getting Item with id ' + id + ' from database: ' + error);
-        response.status(500).json({ error: 'Error getting Item with id ' + id + ' from database: ' + error });
-      } else {
-        response.json(updatedItem);
-      }  
-    });
-  });
-*/
 
   app.put('/api/items', function (request, response) {
     var items = request.body;
@@ -83,5 +56,4 @@ module.exports = function(app) {
       }
     });
   });
-
 };
