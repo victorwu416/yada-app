@@ -4,14 +4,10 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
                        function ($scope, $location, $http, $modal) {
 
   $scope.changeToClean = function () {
-    $scope.inputBackground = '';
-    $scope.showSaveButton = false; 
-  };
-
-  $scope.changeToDirty = function () {
-    $scope.inputBackground = 'input-dirty';
-    $scope.showSaveButton = true;
-    $scope.showSaveSuccess = false;  
+    $scope.itemsDirtiness = [];
+    $scope.items.forEach(function (item) {
+      $scope.itemsDirtiness.push(false);
+    });
   };
 
   $scope.saveItems = function () {
@@ -36,8 +32,10 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
       });
   };
 
-  $scope.onInputChange = function () {
-    $scope.changeToDirty();
+  $scope.onInputChange = function (index) {
+    $scope.showSaveSuccess = false;
+    $scope.showSaveButton = true;
+    $scope.itemsDirtiness[index] = true;
     if ($scope.items[$scope.items.length-1].description.length !== 0) {
       var newItem = { bondId: $scope.id, description: '', status: 'open' };
       $scope.items.push(newItem); 
@@ -57,6 +55,7 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
   };
 
   $scope.getAndPopulate = function () {
+    $scope.showLists = false;
     $scope.id = $location.search().id;
     $http.get('/api/bonds/' + $scope.id + '/items')
       .error(function (data, status, headers, config) {
@@ -66,14 +65,12 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
         $scope.items = data;
         var newItem = { bondId: $scope.id, description: '', status: 'open' };
         $scope.items.push(newItem);
+        $scope.changeToClean();
+        $scope.showLists = true;
       });
   }
 
-
-  $scope.showLists = false;
   $scope.getAndPopulate();
-  $scope.changeToClean();
-  $scope.showLists = true;
 }]);
 
 mainModule.controller('MarkAsDoneModalController', function ($scope, $modalInstance, item, listsControllerScope) {

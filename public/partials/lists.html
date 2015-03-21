@@ -6,11 +6,16 @@
     
       <div ng-repeat="item in items">
         <div class="input-group" ng-show="item.status==='open'">
-          <input type="text" class="form-control" ng-class="inputBackground" ng-change="onInputChange()"
-                 ng-model="item.description" placeholder="{{$last ? 'New item' : ''}}" />
           <span class="input-group-addon" ng-click="openMarkAsDoneModal(item)" ng-show="$last ? false : true">
             <i class="fa fa-check text-success"></i>
           </span>
+          <input type="text" class="form-control" ng-class="itemsDirtiness[$index]===true ? 'input-dirty' : ''" 
+                 ng-model="item.description" placeholder="{{$last ? 'New item' : ''}}"
+                 ng-change="onInputChange($index)" />
+          <span class="input-group-addon" ng-click="saveItems()" ng-show="itemsDirtiness[$index]===true">
+            <i class="fa fa-floppy-o text-info"></i>
+          </span>
+
         </div>
       </div>
 
