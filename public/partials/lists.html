@@ -1,22 +1,29 @@
-<div ng-show="true">
+<div ng-show="showLists">
 
   <div class="panel panel-primary">
     <div class="panel-heading"><span>Your items</span></div>
     <div class="panel-body">
     
       <div ng-repeat="item in items">
-        <div class="input-group">
-          <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-          <input type="text" class="form-control" ng-class="inputBackground" 
-                 ng-model="item.description" />
+        <div class="input-group" ng-show="item.status==='open'">
+          <input type="text" class="form-control" ng-class="inputBackground" ng-change="onInputChange()"
+                 ng-model="item.description" placeholder="{{$last ? 'New item' : ''}}" />
+          <span class="input-group-addon" ng-click="openMarkAsDoneModal(item)" ng-show="$last ? false : true">
+            <i class="fa fa-check text-success"></i>
+          </span>
         </div>
       </div>
 
     </div> <!-- panel-body -->
   </div> <!-- panel -->
 
-  <button type="button" class="btn btn-primary" ng-click="saveList()" ng-show="true">
-    <span class="glyphicon glyphicon-floppy-disk"></span> Save
+  <button type="button" class="btn btn-primary" ng-click="saveItems()" ng-show="showSaveButton">
+    <i class="fa fa-floppy-o"></i> Save
   </button>
 
+  <i class="fa fa-spinner fa-spin" ng-show="showLoadingIcon"></i>
+
+  <alert type="success" ng-show="showSaveSuccess" close="showSaveSuccess = false;">
+    <i class="fa fa-floppy-o"></i> Saved!
+  </alert>
 </div>

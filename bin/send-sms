@@ -2,7 +2,7 @@
 
 console.log('Begin scheduled task: Send SMS reminders');
 
-async = require("async");
+var async = require("async");
 var moment = require('moment-timezone');
 
 var Bond = require('../services/models/Bond');
@@ -82,7 +82,7 @@ Bond.find().exec(function (error, bonds) {
       var lastSmsSent2 = bond.lastSmsSent2;
 
       if (shouldSendSmsNow(now, smsTime1, lastSmsSent1)) {
-        sendSmsAsyncTasks.push( function (callback) { 
+        sendSmsAsyncTasks.push(function (callback) { 
           sendSms(bond.phoneNumber1, bond.name2, function (error) {
             if (!error) { bond.lastSmsSent1 = now; }
             callback(); 
@@ -90,7 +90,7 @@ Bond.find().exec(function (error, bonds) {
         });
       }
       if (shouldSendSmsNow(now, smsTime2, lastSmsSent2)) {
-        sendSmsAsyncTasks.push( function (callback) { 
+        sendSmsAsyncTasks.push(function (callback) { 
           sendSms(bond.phoneNumber2, bond.name1, function (error) {
             if (!error) { bond.lastSmsSent2 = now; }
             callback(); 

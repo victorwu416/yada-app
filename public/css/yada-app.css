@@ -1,3 +1,7 @@
+.input-group {
+  width: 100%;
+}
+
 .input-dirty {
   background-color: AliceBlue;
 }
