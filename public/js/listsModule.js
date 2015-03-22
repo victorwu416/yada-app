@@ -93,6 +93,7 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
   };
   
   $scope.sortItems = function () {
+    $scope.setSaveSortDisplayState(false, false, false, false);   
     $scope.showLoadingIcon = true;
     $scope.getAndPopulateLists(function () {
       $scope.showLoadingIcon = false;
@@ -101,7 +102,6 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
   }
 
   $scope.getAndPopulateLists = function (callback) {
-    $scope.showLists = false;
     $scope.id = $location.search().id;
     $http.get('/api/bonds/' + $scope.id + '/items')
       .error(function (data, status, headers, config) {
@@ -112,7 +112,6 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
         $scope.items.push({ bondId: $scope.id, description: '', status: 'open', assignee: 0 });
         $scope.setSaveSortDisplayState(false, false, false, false);   
         $scope.changeToClean();
-        $scope.showLists = true;
         callback();
       });
   }
