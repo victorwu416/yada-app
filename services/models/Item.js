@@ -5,7 +5,8 @@ var ItemSchema = new mongoose.Schema(
   {
     bondId: String,
     description: String,
-    status: String
+    status: String,
+    assignee: Number
   },
   { collection: 'items' }
 );

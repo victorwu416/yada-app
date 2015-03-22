@@ -1,9 +1,15 @@
-<div ng-show="showLists">
+<div class="lists" ng-show="showLists">
 
   <div class="panel panel-primary">
     <div class="panel-heading"><span>Your items</span></div>
     <div class="panel-body">
     
+      <div class="names">
+        <span><i class="fa fa-circle assignee assignee-0"></i> Unassigned</span>
+        <br/>
+        <span><i class="fa fa-circle assignee assignee-1"></i> {{name1}}</span>
+        <span><i class="fa fa-circle assignee assignee-2"></i> {{name2}}</span>
+      </div>
       <div ng-repeat="item in items">
         <div class="input-group" ng-show="item.status==='open'">
           <span class="input-group-addon" ng-click="openMarkAsDoneModal(item)" ng-show="$last ? false : true">
@@ -12,23 +18,40 @@
           <input type="text" class="form-control" ng-class="itemsDirtiness[$index]===true ? 'input-dirty' : ''" 
                  ng-model="item.description" placeholder="{{$last ? 'New item' : ''}}"
                  ng-change="onInputChange($index)" />
+          <span ng-show="$last ? false : true">
+            <i ng-click="changeAssignee(item)"
+               class="fa fa-circle assignee"
+               ng-class="{'assignee-0': item.assignee===0, 
+                          'assignee-1': item.assignee===1, 
+                          'assignee-2': item.assignee===2}"></i>
+          </span>
           <span class="input-group-addon" ng-click="saveItems()" ng-show="itemsDirtiness[$index]===true">
             <i class="fa fa-floppy-o text-info"></i>
-          </span>
-
+          </span>            
         </div>
       </div>
 
     </div> <!-- panel-body -->
   </div> <!-- panel -->
 
+  <alert type="success" ng-show="showSaveSuccess" close="showSaveSuccess = false;">
+    <i class="fa fa-floppy-o"></i> Saved!
+  </alert>
+
+  <alert type="success" ng-show="showSortSuccess" close="showSortSuccess = false;">
+    <i class="fa fa-sort-amount-asc"></i> Sorted!
+  </alert>
+
   <button type="button" class="btn btn-primary" ng-click="saveItems()" ng-show="showSaveButton">
     <i class="fa fa-floppy-o"></i> Save
   </button>
 
+  <button type="button" class="btn btn-primary" ng-click="sortItems()" ng-show="showSortButton">
+    <i class="fa fa-sort-amount-asc"></i> Sort
+  </button>
+
   <i class="fa fa-spinner fa-spin" ng-show="showLoadingIcon"></i>
 
-  <alert type="success" ng-show="showSaveSuccess" close="showSaveSuccess = false;">
-    <i class="fa fa-floppy-o"></i> Saved!
-  </alert>
+
+
 </div>

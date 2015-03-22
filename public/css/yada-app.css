@@ -6,14 +6,56 @@
   background-color: AliceBlue;
 }
 
-/* lists */
-.panel-body .ng-scope + .ng-scope .input-group {
-  margin: 10px 0 0 0;
+/********** Lists **********/
+.lists .panel-body .names span {
+  margin-right: 10px;
+  margin-left: 5px;
+}
+.lists .panel-body .ng-scope .input-group {
+  margin-top: 10px;
 }
 
-/* settings */
-.panel-body .input-group + .input-group {
-  margin: 10px 0 0 0;
+.lists .panel-body .ng-scope:first-child .input-group {
+  margin-top: 0px;
+}
+
+.lists .panel-body .ng-scope .input-group input {
+  padding-left: 38px;
+}
+
+.lists .panel-body .ng-scope:last-child .input-group input {
+  padding-left: 10px;
+}
+
+.lists .input-group .assignee {
+  z-index: 2;
+  position: absolute;
+  left: 55px;
+  top: 10px;
+  width: 20px;
+}
+
+.lists .assignee-0 {
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.lists .assignee-1 {
+  color: SaddleBrown;
+}
+
+.lists .assignee-2 {
+  color: LightPink;
+}
+
+
+/********** Settings **********/
+.settings .panel-body .input-group {
+  margin-top: 10px;
+}
+
+.settings .panel-body .input-group:first-child {
+  margin-top: 0px;
 }
 
 .sms-time-btn-group {
@@ -24,27 +66,6 @@
 
 
 
-.glyphicon-refresh-animate {
-  -animation: spin .7s infinite linear;
-  -ms-animation: spin .7s infinite linear;
-  -webkit-animation: spinw .7s infinite linear;
-  -moz-animation: spinm .7s infinite linear;
-}
- 
-@keyframes spin {
-  from { transform: scale(1) rotate(0deg);}
-  to { transform: scale(1) rotate(360deg);}
-}
-  
-@-webkit-keyframes spinw {
-  from { -webkit-transform: rotate(0deg);}
-  to { -webkit-transform: rotate(360deg);}
-}
- 
-@-moz-keyframes spinm {
-  from { -moz-transform: rotate(0deg);}
-  to { -moz-transform: rotate(360deg);}
-}
 
 
 
