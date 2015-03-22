@@ -40,20 +40,15 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
     return items.sort($scope.compareOnAssigneeAndDescription).slice(0);
   }
 
-  $scope.setSaveSortDisplayState = function(showSaveButton, showSortButton, showSaveSuccess, showSortSuccess) {
+  $scope.setSaveSortButtonDisplay = function(showSaveButton, showSortButton) {
     $scope.showSaveButton = showSaveButton;
     $scope.showSortButton = showSortButton;
-    $scope.showSaveSuccess = showSaveSuccess;
-    $scope.showSortSuccess = showSortSuccess;
   };
 
   $scope.saveItems = function () {
-    $scope.setSaveSortDisplayState(false, false, false, false);    
-    $scope.showLoadingIcon = true;
+    $scope.setSaveSortButtonDisplay(false, false);    
     var items = $scope.items.slice(0);
-	if (items[items.length-1].description.length === 0) {
-      items.pop();
-    }
+	if (items[items.length-1].description.length === 0) { items.pop(); }
     $http.put('/api/items', items)
       .error(function (data, status, headers, config) {
         console.log('Error putting Items');
@@ -61,14 +56,14 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
       .success(function (data, status, headers, config) {
         $scope.items = $scope.getItemsInPreviousOrder($scope.items.slice(0), data);
         $scope.items.push({ bondId: $scope.id, description: '', status: 'open', assignee: 0 });
-        $scope.setSaveSortDisplayState(false, true, true, false);   
-        $scope.showLoadingIcon = false;
+        $scope.setSaveSortButtonDisplay(false, true);   
         $scope.changeToClean();
+        toaster.pop('success', '', 'Saved!');
       });
   };
 
   $scope.onInputChange = function (index) {
-    $scope.setSaveSortDisplayState(true, false, false, false);   
+    $scope.setSaveSortButtonDisplay(true, false);   
     $scope.itemsDirtiness[index] = true;
     if ($scope.items[$scope.items.length-1].description.length !== 0) {
       $scope.items.push({ bondId: $scope.id, description: '', status: 'open', assignee: 0 }); 
@@ -93,11 +88,9 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
   };
   
   $scope.sortItems = function () {
-    $scope.setSaveSortDisplayState(false, false, false, false);   
-    $scope.showLoadingIcon = true;
+    $scope.setSaveSortButtonDisplay(false, false);
     $scope.getAndPopulateItems(function () {
-      $scope.showLoadingIcon = false;
-      $scope.setSaveSortDisplayState(false, false, false, true);   
+      toaster.pop('warning', '', 'Sorted!');
     });
   }
 
@@ -110,7 +103,7 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
       .success(function (data, status, headers, config) {
         $scope.items = $scope.getItemsInSortedOrder(data);
         $scope.items.push({ bondId: $scope.id, description: '', status: 'open', assignee: 0 });
-        $scope.setSaveSortDisplayState(false, false, false, false);   
+        $scope.setSaveSortButtonDisplay(false, false);   
         $scope.changeToClean();
         callback();
       });
@@ -126,12 +119,6 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
         $scope.bond = data;
       });
   };
-
-
-        $scope.pop = function(){
-            toaster.pop('success', "Test", "");
-        };
-
 
   $scope.getAndPopulateItems(function() {});
   $scope.getAndPopulateBond();
@@ -149,7 +136,6 @@ mainModule.controller('MarkAsDoneModalController', function ($scope, $modalInsta
   };
 
   $scope.item = item;
-
 });
 
 

@@ -1,5 +1,4 @@
 <div class="settings" ng-show="showSettings">
- 
   <div class="panel panel-primary">
     <div class="panel-heading"><span>Your names</span></div>
     <div class="panel-body">
@@ -60,11 +59,6 @@
   <button type="button" class="btn btn-primary" ng-click="saveBond()" ng-show="showSaveButton">
     <i class="fa fa-floppy-o"></i> Save
   </button>
-
-  <i class="fa fa-spinner fa-spin" ng-show="showLoadingIcon"></i>
-
-  <alert type="success" ng-show="showSaveSuccess" close="showSaveSuccess = false;">
-    <i class="fa fa-floppy-o"></i> Saved!
-  </alert>
 </div>
 
+<toaster-container toaster-options="{'position-class': 'toast-top-center', 'time-out': 1500}"></toaster-container>

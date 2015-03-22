@@ -6,6 +6,27 @@
   background-color: AliceBlue;
 }
 
+#toast-container > .toast {
+  background-image: none !important;
+}
+
+#toast-container > .toast:before {
+  font-family: FontAwesome;
+  font-size: 20px;  
+  line-height: 19px;
+  position: relative;
+  float: left;
+  margin-left: -25px;
+  margin-right: 0px;
+} 
+
+#toast-container > .toast-success:before {
+  content: "\f0c7";
+}
+#toast-container > .toast-warning:before {
+  content: "\f160";
+}
+
 /********** Lists **********/
 .lists .panel-body .names span {
   margin-right: 10px;
@@ -50,11 +71,3 @@
 .sms-time-btn-group {
   margin: 10px 0 0 0;
 }
-
-
-
-
-
-
-
-

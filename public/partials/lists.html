@@ -31,14 +31,6 @@
     </div> <!-- panel-body -->
   </div> <!-- panel -->
 
-  <alert type="success" ng-show="showSaveSuccess" close="showSaveSuccess = false;">
-    <i class="fa fa-floppy-o"></i> Saved!
-  </alert>
-
-  <alert type="success" ng-show="showSortSuccess" close="showSortSuccess = false;">
-    <i class="fa fa-sort-amount-asc"></i> Sorted!
-  </alert>
-
   <button type="button" class="btn btn-primary" ng-click="saveItems()" ng-show="showSaveButton">
     <i class="fa fa-floppy-o"></i> Save
   </button>
@@ -46,20 +38,6 @@
   <button type="button" class="btn btn-primary" ng-click="sortItems()" ng-show="showSortButton">
     <i class="fa fa-sort-amount-asc"></i> Sort
   </button>
-
-  <i class="fa fa-spinner fa-spin" ng-show="showLoadingIcon"></i>
 </div>
-
-
-<br/>
-<br/>
-<br/>
-<br/>
-
-<br/>
-<br/>
-<br/>
-<br/>
-<span ng-click="pop()">T</span>
 
 <toaster-container toaster-options="{'position-class': 'toast-top-center', 'time-out': 1500}"></toaster-container>
