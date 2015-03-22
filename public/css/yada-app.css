@@ -20,19 +20,7 @@
 }
 
 .lists .panel-body .ng-scope .input-group input {
-  padding-left: 48px;
-}
-
-.lists .panel-body .ng-scope:last-child .input-group input {
-  padding-left: 10px;
-}
-
-.lists .input-group .assignee {
-  z-index: 2;
-  position: absolute;
-  left: 55px;
-  top: 10px;
-  width: 20px;
+  margin-left: -1px;
 }
 
 .lists .assignee-0, .mark-as-done-modal .assignee-0 {

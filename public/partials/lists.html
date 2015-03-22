@@ -14,16 +14,16 @@
           <span class="input-group-addon" ng-click="openMarkAsDoneModal(item)" ng-show="$last ? false : true">
             <i class="fa fa-check text-success"></i>
           </span>
-          <input type="text" class="form-control" ng-class="itemsDirtiness[$index]===true ? 'input-dirty' : ''" 
-                 ng-model="item.description" placeholder="{{$last ? 'New item' : ''}}"
-                 ng-change="onInputChange($index)" />
-          <span ng-show="$last ? false : true">
+          <span class="input-group-addon" ng-show="$last ? false : true">
             <i ng-click="changeAssignee(item)"
                class="fa fa-circle assignee"
                ng-class="{'assignee-0': item.assignee===0, 
                           'assignee-1': item.assignee===1, 
                           'assignee-2': item.assignee===2}"></i>
           </span>
+          <input type="text" class="form-control" ng-class="itemsDirtiness[$index]===true ? 'input-dirty' : ''" 
+                 ng-model="item.description" placeholder="{{$last ? 'New item' : ''}}"
+                 ng-change="onInputChange($index)" />
           <span class="input-group-addon" ng-click="saveItems()" ng-show="itemsDirtiness[$index]===true">
             <i class="fa fa-floppy-o text-info"></i>
           </span>            
