@@ -1,7 +1,7 @@
-var listsModule = angular.module('listsModule', ['ui.bootstrap']);
+var listsModule = angular.module('listsModule', ['ui.bootstrap', 'toaster']);
 
-listsModule.controller('ListsController', ['$scope', '$location', '$http', '$modal', 
-                       function ($scope, $location, $http, $modal) {
+listsModule.controller('ListsController', ['$scope', '$location', '$http', '$modal', 'toaster', 
+                       function ($scope, $location, $http, $modal, toaster) {
 
   $scope.changeToClean = function () {
     $scope.itemsDirtiness = [];
@@ -126,6 +126,12 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
         $scope.bond = data;
       });
   };
+
+
+        $scope.pop = function(){
+            toaster.pop('success', "title", "");
+        };
+
 
   $scope.getAndPopulateItems(function() {});
   $scope.getAndPopulateBond();
