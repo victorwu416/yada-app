@@ -93,7 +93,9 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
   };
   
   $scope.sortItems = function () {
+    $scope.showLoadingIcon = true;
     $scope.getAndPopulateLists(function () {
+      $scope.showLoadingIcon = false;
       $scope.setSaveSortDisplayState(false, false, false, true);   
     });
   }
