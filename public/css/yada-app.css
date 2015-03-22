@@ -6,6 +6,12 @@
   background-color: AliceBlue;
 }
 
+#toast-container > div {
+  width: 200px;
+  padding-top: 22px;
+  padding-bottom: 22px;
+}
+
 #toast-container > .toast {
   background-image: none !important;
 }
