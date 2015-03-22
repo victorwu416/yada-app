@@ -129,7 +129,7 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
 
 
         $scope.pop = function(){
-            toaster.pop('success', "title", "");
+            toaster.pop('success', "Test", "");
         };
 
 
