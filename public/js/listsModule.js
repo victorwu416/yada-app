@@ -95,13 +95,13 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
   $scope.sortItems = function () {
     $scope.setSaveSortDisplayState(false, false, false, false);   
     $scope.showLoadingIcon = true;
-    $scope.getAndPopulateLists(function () {
+    $scope.getAndPopulateItems(function () {
       $scope.showLoadingIcon = false;
       $scope.setSaveSortDisplayState(false, false, false, true);   
     });
   }
 
-  $scope.getAndPopulateLists = function (callback) {
+  $scope.getAndPopulateItems = function (callback) {
     $scope.id = $location.search().id;
     $http.get('/api/bonds/' + $scope.id + '/items')
       .error(function (data, status, headers, config) {
@@ -116,20 +116,19 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
       });
   }
 
-  $scope.getAndPopulateNames = function () {
+  $scope.getAndPopulateBond = function () {
     $scope.id = $location.search().id;
     $http.get('/api/bonds/' + $scope.id)
       .error(function (data, status, headers, config) {
         console.log('Error getting Bond with id: ' + $scope.id);
       })
       .success(function (data, status, headers, config) {
-        $scope.name1 = data.name1;
-        $scope.name2 = data.name2;
+        $scope.bond = data;
       });
   };
 
-  $scope.getAndPopulateLists(function() {});
-  $scope.getAndPopulateNames();
+  $scope.getAndPopulateItems(function() {});
+  $scope.getAndPopulateBond();
 }]);
 
 mainModule.controller('MarkAsDoneModalController', function ($scope, $modalInstance, item, listsControllerScope) {
@@ -142,6 +141,9 @@ mainModule.controller('MarkAsDoneModalController', function ($scope, $modalInsta
     listsControllerScope.saveItems();
     $scope.dismiss();
   };
+
+  $scope.item = item;
+
 });
 
 

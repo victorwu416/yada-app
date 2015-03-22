@@ -1,8 +1,21 @@
-<div class="modal-body">  
-  Mark as done and archive?
-</div>
+<div class="mark-as-done-modal">
 
-<div class="modal-footer">
-  <button class="btn btn-sm btn-primary" ng-click="markAsDoneAndSaveItems()">OK</button>
-  <button class="btn btn-sm btn-warning" ng-click="dismiss()">Cancel</button>
+  <div class="modal-body">  
+    <div>Mark as done and archive?</div>
+    <p/>
+    <div>
+      <i class="fa fa-circle assignee"
+         ng-class="{'assignee-0': item.assignee===0, 
+                    'assignee-1': item.assignee===1, 
+                    'assignee-2': item.assignee===2}">
+      </i>
+      {{item.description}}
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-sm btn-primary" ng-click="markAsDoneAndSaveItems()">OK</button>
+    <button class="btn btn-sm btn-warning" ng-click="dismiss()">Cancel</button>
+  </div>
+
 </div>
