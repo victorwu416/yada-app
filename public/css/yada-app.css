@@ -21,6 +21,7 @@
 
 .lists .panel-body .ng-scope .input-group input {
   margin-left: -1px;
+  width: 100.2%;
 }
 
 .lists .assignee-0, .mark-as-done-modal .assignee-0 {
