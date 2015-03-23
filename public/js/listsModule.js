@@ -3,6 +3,10 @@ var listsModule = angular.module('listsModule', ['ui.bootstrap', 'toaster']);
 listsModule.controller('ListsController', ['$scope', '$location', '$http', '$modal', 'toaster', 
                        function ($scope, $location, $http, $modal, toaster) {
 
+  $scope.sendSmsReminder = function (item) {
+    console.log('send sms');
+  } 
+
   $scope.changeToClean = function () {
     $scope.itemsDirtiness = [];
     $scope.items.forEach(function (item) {
@@ -69,11 +73,6 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
       $scope.items.push({ bondId: $scope.id, description: '', status: 'open', assignee: 0 }); 
     }
   };
-
-  $scope.changeAssignee = function (item) {
-    item.assignee = (item.assignee + 1) % 3;
-    $scope.saveItems();
-  }
 
   $scope.openMarkAsDoneModal = function (item) {
     var modalInstance = $modal.open({

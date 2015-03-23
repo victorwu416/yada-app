@@ -4,11 +4,8 @@
     <div>Mark as done and archive?</div>
     <p/>
     <div>
-      <i class="fa fa-circle assignee"
-         ng-class="{'assignee-0': item.assignee===0, 
-                    'assignee-1': item.assignee===1, 
-                    'assignee-2': item.assignee===2}">
-      </i>
+      <i class="fa fa-circle assignee"            
+         ng-class="{0: 'assignee-0', 1: 'assignee-1', 2: 'assignee-2'}[item.assignee]"></i>
       {{item.description}}
     </div>
   </div>
