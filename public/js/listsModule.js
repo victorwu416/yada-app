@@ -77,7 +77,8 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
 	  size: 'sm',
       resolve: {
         item: function () { return item; },
-        listsControllerScope: function () { return $scope; }
+        listsControllerScope: function () { return $scope; },
+        toaster: function () { return toaster; }
       }
     });
   };
@@ -133,7 +134,8 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
   $scope.getAndPopulateBond();
 }]);
 
-mainModule.controller('MarkAsDoneModalController', function ($scope, $modalInstance, item, listsControllerScope) {
+mainModule.controller('MarkAsDoneModalController', 
+                      function ($scope, $modalInstance, $location, $http, item, listsControllerScope, toaster) {
   $scope.dismiss = function () {
     $modalInstance.dismiss();
   };
@@ -144,7 +146,29 @@ mainModule.controller('MarkAsDoneModalController', function ($scope, $modalInsta
     $scope.dismiss();
   };
 
+  $scope.markAsDoneAndSaveItemsAndNotify = function () {
+    item.status = 'done';
+    listsControllerScope.saveItems();
+
+    var phoneNumberTo = (item.assignee===1 ? $scope.bond.phoneNumber2 : $scope.bond.phoneNumber1);
+    var nameTo =        (item.assignee===1 ? $scope.bond.name2        : $scope.bond.name1);
+    var nameFrom =      (item.assignee===1 ? $scope.bond.name1        : $scope.bond.name2);
+    var body = nameFrom + ':' + ' FINISHED ' + item.description + ' | ' + 
+               'CHECK ITEMS: ' + $location.absUrl();
+    var sms = { 'phoneNumberTo': phoneNumberTo, 'body': body };
+    $http.post('/api/sms', sms)
+      .error(function (data, status, headers, config) {
+        console.log('Error sending SMS');
+      })
+      .success(function (data, status, headers, config) {
+        toaster.pop('wait', '', 'Sent!');
+      });
+
+    $scope.dismiss();
+  }
+
   $scope.item = item;
+  $scope.bond = listsControllerScope.bond;
 });
 
 mainModule.controller('SendSmsReminderModalController',
@@ -157,8 +181,8 @@ mainModule.controller('SendSmsReminderModalController',
     var phoneNumberTo = (item.assignee===1 ? $scope.bond.phoneNumber1 : $scope.bond.phoneNumber2);
     var nameTo =        (item.assignee===1 ? $scope.bond.name1        : $scope.bond.name2);
     var nameFrom =      (item.assignee===1 ? $scope.bond.name2        : $scope.bond.name1);
-    var body = nameFrom + ':' + ' Remember to ' + item.description + ' | ' + 
-               'Check your items: ' + $location.absUrl();
+    var body = nameFrom + ':' + ' REMEMBER ' + item.description + ' | ' + 
+               'CHECK ITEMS: ' + $location.absUrl();
     var sms = { 'phoneNumberTo': phoneNumberTo, 'body': body };
     $http.post('/api/sms', sms)
       .error(function (data, status, headers, config) {
@@ -167,6 +191,7 @@ mainModule.controller('SendSmsReminderModalController',
       .success(function (data, status, headers, config) {
         toaster.pop('wait', '', 'Sent!');
       });
+
     $scope.dismiss();
   };
 
