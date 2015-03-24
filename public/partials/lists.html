@@ -21,7 +21,7 @@
           <span class="input-group-addon" ng-show="$last ? false : true">
              <span ng-class="{'assignee-0': item.assignee===0}">
                <span ng-class="{'assignee-1': item.assignee===1}">
-                 <span ng-class="{'assignee-2': item.assignee===2}" tooltip="Change assignee">
+                 <span ng-class="{'assignee-2': item.assignee===2}">
                    <i class="fa fa-circle assignee"
                       ng-click="item.assignee = (item.assignee + 1) % 3; saveItems()"></i>            
                  </span></span></span>
