@@ -153,7 +153,7 @@ mainModule.controller('MarkAsDoneModalController',
     var phoneNumberTo = (item.assignee===1 ? $scope.bond.phoneNumber2 : $scope.bond.phoneNumber1);
     var nameTo =        (item.assignee===1 ? $scope.bond.name2        : $scope.bond.name1);
     var nameFrom =      (item.assignee===1 ? $scope.bond.name1        : $scope.bond.name2);
-    var body = nameFrom + ':' + ' FINISHED ' + item.description + ' | ' + 
+    var body = nameFrom + ':' + ' DONE ' + item.description + ' | ' + 
                'OPEN ITEMS: ' + $location.absUrl();
     var sms = { 'phoneNumberTo': phoneNumberTo, 'body': body };
     $http.post('/api/sms', sms)
