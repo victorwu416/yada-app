@@ -29,9 +29,19 @@
 #toast-container > .toast-success:before {
   content: "\f0c7";
 }
+
 #toast-container > .toast-warning:before {
   content: "\f160";
 }
+
+#toast-container > .toast-wait:before {
+  content: "\f0a2";
+}
+
+#toast-container > .toast-wait {
+  background-color: brown;
+}
+
 
 /********** Lists **********/
 .lists .panel-body .names span {
@@ -51,15 +61,15 @@
   width: 100.5%;
 }
 
-.lists .assignee-0, .mark-as-done-modal .assignee-0 {
+.lists .assignee-0, .mark-as-done-modal .assignee-0, .send-sms-reminder-modal .assignee-0 {
   color: black;
 }
 
-.lists .assignee-1, .mark-as-done-modal .assignee-1 {
+.lists .assignee-1, .mark-as-done-modal .assignee-1, .send-sms-reminder-modal .assignee-1 {
   color: Peru;
 }
 
-.lists .assignee-2, .mark-as-done-modal .assignee-2 {
+.lists .assignee-2, .mark-as-done-modal .assignee-2, .send-sms-reminder-modal .assignee-2 {
   color: PaleVioletRed;
 }
 

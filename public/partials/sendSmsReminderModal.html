@@ -1,0 +1,19 @@
+<div class="send-sms-reminder-modal">
+
+  <div class="modal-body">  
+    <div>Send SMS reminder to {{item.assignee===1 ? bond.name1 : bond.name2}} at 
+                              {{item.assignee===1 ? bond.phoneNumber1 : bond.phoneNumber2}}?</div>
+    <p/>
+    <div>
+      <i class="fa fa-circle assignee"            
+         ng-class="{0: 'assignee-0', 1: 'assignee-1', 2: 'assignee-2'}[item.assignee]"></i>
+      {{item.description}}
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-sm btn-primary" ng-click="sendSmsReminder()">Send</button>
+    <button class="btn btn-sm btn-warning" ng-click="dismiss()">Cancel</button>
+  </div>
+
+</div>

@@ -26,12 +26,10 @@
                  ng-change="onInputChange($index)" />
           <span class="input-group-addon" ng-click="saveItems()" ng-show="itemsDirtiness[$index]===true">
             <i class="fa fa-floppy-o text-info"></i>
-          </span>
-<!--            
-          <span class="input-group-addon" ng-click="sendSmsReminder(item)" 
+          </span>  
+          <span class="input-group-addon" ng-click="openSendSmsReminderModal(item)" 
                 ng-show="itemsDirtiness[$index]===false && item.assignee!==0">
             <i class="fa fa-bell-o text-info"></i>
--->
           </span>            
         </div>
       </div>

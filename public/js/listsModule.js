@@ -3,10 +3,6 @@ var listsModule = angular.module('listsModule', ['ui.bootstrap', 'toaster']);
 listsModule.controller('ListsController', ['$scope', '$location', '$http', '$modal', 'toaster', 
                        function ($scope, $location, $http, $modal, toaster) {
 
-  $scope.sendSmsReminder = function (item) {
-    console.log('send sms');
-  } 
-
   $scope.changeToClean = function () {
     $scope.itemsDirtiness = [];
     $scope.items.forEach(function (item) {
@@ -85,6 +81,20 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
       }
     });
   };
+
+  $scope.openSendSmsReminderModal = function (item) {
+    var modalInstance = $modal.open({
+      templateUrl: 'partials/sendSmsReminderModal.html',
+      controller: 'SendSmsReminderModalController',
+	  size: 'sm',
+      resolve: {
+        item: function () { return item; },
+        listsControllerScope: function () { return $scope; },
+        toaster: function () { return toaster; }
+      }
+    });
+  } 
+
   
   $scope.sortItems = function () {
     $scope.setSaveSortButtonDisplay(false, false);
@@ -135,6 +145,33 @@ mainModule.controller('MarkAsDoneModalController', function ($scope, $modalInsta
   };
 
   $scope.item = item;
+});
+
+mainModule.controller('SendSmsReminderModalController',
+                      function ($scope, $modalInstance, $location, $http, item, listsControllerScope, toaster) {
+  $scope.dismiss = function () {
+    $modalInstance.dismiss();
+  };
+
+  $scope.sendSmsReminder = function () {
+    var phoneNumberTo = (item.assignee===1 ? $scope.bond.phoneNumber1 : $scope.bond.phoneNumber2);
+    var nameTo =        (item.assignee===1 ? $scope.bond.name1        : $scope.bond.name2);
+    var nameFrom =      (item.assignee===1 ? $scope.bond.name2        : $scope.bond.name1);
+    var body = nameFrom + ':' + ' Remember to ' + item.description + ' | ' + 
+               'Check your items: ' + $location.absUrl();
+    var sms = { 'phoneNumberTo': phoneNumberTo, 'body': body };
+    $http.post('/api/sms', sms)
+      .error(function (data, status, headers, config) {
+        console.log('Error sending SMS');
+      })
+      .success(function (data, status, headers, config) {
+        toaster.pop('wait', '', 'Sent!');
+      });
+    $scope.dismiss();
+  };
+
+  $scope.item = item;
+  $scope.bond = listsControllerScope.bond;
 });
 
 
