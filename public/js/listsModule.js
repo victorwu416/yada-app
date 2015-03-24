@@ -154,7 +154,7 @@ mainModule.controller('MarkAsDoneModalController',
     var nameTo =        (item.assignee===1 ? $scope.bond.name2        : $scope.bond.name1);
     var nameFrom =      (item.assignee===1 ? $scope.bond.name1        : $scope.bond.name2);
     var body = nameFrom + ':' + ' FINISHED ' + item.description + ' | ' + 
-               'CHECK ITEMS: ' + $location.absUrl();
+               'OPEN ITEMS: ' + $location.absUrl();
     var sms = { 'phoneNumberTo': phoneNumberTo, 'body': body };
     $http.post('/api/sms', sms)
       .error(function (data, status, headers, config) {
@@ -182,7 +182,7 @@ mainModule.controller('SendSmsReminderModalController',
     var nameTo =        (item.assignee===1 ? $scope.bond.name1        : $scope.bond.name2);
     var nameFrom =      (item.assignee===1 ? $scope.bond.name2        : $scope.bond.name1);
     var body = nameFrom + ':' + ' REMEMBER ' + item.description + ' | ' + 
-               'CHECK ITEMS: ' + $location.absUrl();
+               'OPEN ITEMS: ' + $location.absUrl();
     var sms = { 'phoneNumberTo': phoneNumberTo, 'body': body };
     $http.post('/api/sms', sms)
       .error(function (data, status, headers, config) {
