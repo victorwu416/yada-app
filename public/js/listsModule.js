@@ -45,6 +45,14 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
     $scope.showSortButton = showSortButton;
   };
 
+  $scope.onInputChange = function (index) {
+    $scope.setSaveSortButtonDisplay(true, false);   
+    $scope.itemsDirtiness[index] = true;
+    if ($scope.items[$scope.items.length-1].description.length !== 0) {
+      $scope.items.push({ bondId: $scope.id, description: '', status: 'open', assignee: 0 }); 
+    }
+  };
+
   $scope.saveItems = function () {
     $scope.setSaveSortButtonDisplay(false, false);    
     var items = $scope.items.slice(0);
@@ -61,14 +69,13 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
         toaster.pop('success', '', 'Saved!');
       });
   };
-
-  $scope.onInputChange = function (index) {
-    $scope.setSaveSortButtonDisplay(true, false);   
-    $scope.itemsDirtiness[index] = true;
-    if ($scope.items[$scope.items.length-1].description.length !== 0) {
-      $scope.items.push({ bondId: $scope.id, description: '', status: 'open', assignee: 0 }); 
-    }
-  };
+  
+  $scope.sortItems = function () {
+    $scope.setSaveSortButtonDisplay(false, false);
+    $scope.getAndPopulateItems(function () {
+      toaster.pop('warning', '', 'Sorted!');
+    });
+  }
 
   $scope.openMarkAsDoneModal = function (item) {
     var modalInstance = $modal.open({
@@ -96,14 +103,6 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
     });
   } 
 
-  
-  $scope.sortItems = function () {
-    $scope.setSaveSortButtonDisplay(false, false);
-    $scope.getAndPopulateItems(function () {
-      toaster.pop('warning', '', 'Sorted!');
-    });
-  }
-
   $scope.getAndPopulateItems = function (callback) {
     $scope.id = $location.search().id;
     $http.get('/api/bonds/' + $scope.id + '/items')
@@ -130,8 +129,28 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
       });
   };
 
+  $scope.getStoredCurrentPerson = function () { 
+    if (typeof(Storage) === 'undefined') { return 1; }
+    if (localStorage.getItem('currentPerson') === null) {
+      $scope.setStoredCurrentPerson(1);
+      return 1;
+    }    
+    if (localStorage.getItem('currentPerson') === '1') {
+      return 1;
+    } else {
+      return 2;
+    }
+  }
+ 
+  $scope.setStoredCurrentPerson = function (currentPerson) {
+    if (currentPerson === 1) { localStorage.setItem('currentPerson', '1'); }
+    else                     { localStorage.setItem('currentPerson', '2'); } 
+  }
+
   $scope.getAndPopulateItems(function() {});
   $scope.getAndPopulateBond();
+  $scope.currentPerson = $scope.getStoredCurrentPerson();
+
 }]);
 
 mainModule.controller('MarkAsDoneModalController', 
@@ -155,9 +174,9 @@ mainModule.controller('MarkAsDoneModalController',
       if (item.status === 'open') { numItems++; }
     });
     numItems--;
-    var phoneNumberTo = (item.assignee===1 ? $scope.bond.phoneNumber2 : $scope.bond.phoneNumber1);
-    var nameTo =        (item.assignee===1 ? $scope.bond.name2        : $scope.bond.name1);
-    var nameFrom =      (item.assignee===1 ? $scope.bond.name1        : $scope.bond.name2);
+    var phoneNumberTo = ($scope.currentPerson===1 ? $scope.bond.phoneNumber2 : $scope.bond.phoneNumber1);
+    var nameTo =        ($scope.currentPerson===1 ? $scope.bond.name2        : $scope.bond.name1);
+    var nameFrom =      ($scope.currentPerson===1 ? $scope.bond.name1        : $scope.bond.name2);
     var body = nameFrom + ':' + ' DONE ' + item.description + ' | ' + 
                numItems + ' OPEN ITEMS ' + $location.absUrl();
     var sms = { 'phoneNumberTo': phoneNumberTo, 'body': body };
@@ -188,9 +207,9 @@ mainModule.controller('SendSmsReminderModalController',
       if (item.status === 'open') { numItems++; }
     });
     numItems--;
-    var phoneNumberTo = (item.assignee===1 ? $scope.bond.phoneNumber1 : $scope.bond.phoneNumber2);
-    var nameTo =        (item.assignee===1 ? $scope.bond.name1        : $scope.bond.name2);
-    var nameFrom =      (item.assignee===1 ? $scope.bond.name2        : $scope.bond.name1);
+    var phoneNumberTo = ($scope.currentPerson===1 ? $scope.bond.phoneNumber2 : $scope.bond.phoneNumber1);
+    var nameTo =        ($scope.currentPerson===1 ? $scope.bond.name2        : $scope.bond.name1);
+    var nameFrom =      ($scope.currentPerson===1 ? $scope.bond.name1        : $scope.bond.name2);
     var body = nameFrom + ':' + ' REMEMBER ' + item.description + ' | ' + 
                numItems + ' OPEN ITEMS ' + $location.absUrl();
     var sms = { 'phoneNumberTo': phoneNumberTo, 'body': body };
@@ -207,9 +226,5 @@ mainModule.controller('SendSmsReminderModalController',
 
   $scope.item = item;
   $scope.bond = listsControllerScope.bond;
+  $scope.currentPerson = listsControllerScope.currentPerson;
 });
-
-
-
-
- 

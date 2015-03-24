@@ -1,8 +1,9 @@
 <div class="send-sms-reminder-modal">
 
   <div class="modal-body">  
-    <div>SMS-remind {{item.assignee===1 ? bond.name1 : bond.name2}} at 
-                    {{item.assignee===1 ? bond.phoneNumber1 : bond.phoneNumber2}}?</div>
+    <div>SMS-remind {{currentPerson===1 ? 
+                      bond.name2 + ' at ' + bond.phoneNumber2 : 
+                      bond.name1 + ' at ' + bond.phoneNumber1 }}?</div>
     <p/>
     <div>
       <i class="fa fa-circle assignee"            

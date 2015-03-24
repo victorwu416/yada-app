@@ -2,9 +2,9 @@
 
   <div class="modal-body">  
     <div>Mark as done? (Archive)</div>
-    <div ng-show="item.assignee!==0">
-      SMS-notify {{item.assignee===1 ? bond.name2 : bond.name1}} at 
-                 {{item.assignee===1 ? bond.phoneNumber2 : bond.phoneNumber1}}?</div>
+    <div>SMS-notify {{currentPerson===1 ? 
+                      bond.name2 + ' at ' + bond.phoneNumber2 : 
+                      bond.name1 + ' at ' + bond.phoneNumber1 }}?</div>
     <p/>
     <div>
       <i class="fa fa-circle assignee"            
@@ -14,8 +14,7 @@
   </div>
 
   <div class="modal-footer">
-    <button ng-show="item.assignee!==0"
-            class="btn btn-sm btn-primary" ng-click="markAsDoneAndSaveItemsAndNotify()">Done + Notify</button>
+    <button class="btn btn-sm btn-primary" ng-click="markAsDoneAndSaveItemsAndNotify()">Done + Notify</button>
     <button class="btn btn-sm btn-primary" ng-click="markAsDoneAndSaveItems()">Done</button>
     <button class="btn btn-sm btn-warning" ng-click="dismiss()">Cancel</button>
   </div>

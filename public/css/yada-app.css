@@ -44,10 +44,25 @@
 
 
 /********** Lists **********/
-.lists .panel-body .names span {
-  margin-right: 10px;
-  margin-left: 5px;
+.lists .navbar {
+  background-color: #536267;
+  border-color: #536267;
 }
+
+.lists .navbar .btn-group {
+  float: right;
+}
+
+.lists .navbar .btn-group {
+  float: right;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.lists .panel {
+  margin-top: 60px;
+}
+
 .lists .panel-body .ng-scope .input-group {
   margin-top: 10px;
 }
