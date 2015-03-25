@@ -7,5 +7,5 @@ yadaApp.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('main',     {url: '/main',        templateUrl: 'partials/main.html',     controller: 'MainController'})
     .state('settings', {url: '/settings?id', templateUrl: 'partials/settings.html', controller: 'SettingsController'})
-    .state('lists   ', {url: '/lists?id',    templateUrl: 'partials/lists.html',    controller: 'ListsController'});
+    .state('lists',    {url: '/lists?id',    templateUrl: 'partials/lists.html',    controller: 'ListsController'});
 });

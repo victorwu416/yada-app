@@ -37,9 +37,7 @@ settingsModule.controller('SettingsController', ['$scope', '$location', '$http',
       });
   };
 
-  $scope.showSettings = false;
   $scope.getAndPopulate();
   $scope.changeToClean();
-  $scope.showSettings = true;
 }]);
 

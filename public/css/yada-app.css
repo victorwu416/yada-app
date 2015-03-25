@@ -51,7 +51,7 @@
 
 .lists .settings-link {
   float: left;
-  margin-top: 14px;
+  margin-top: 15px;
   margin-left: 10px;
   color: white;
 }
@@ -93,6 +93,22 @@
 
 
 /********** Settings **********/
+.settings .navbar {
+  background-color: #536267;
+  border-color: #536267;
+}
+
+.settings .lists-link {
+  float: left;
+  margin-top: 15px;
+  margin-left: 10px;
+  color: white;
+}
+
+.settings .panel {
+  margin-top: 60px;
+}
+
 .settings .panel-body .input-group {
   margin-top: 10px;
 }
