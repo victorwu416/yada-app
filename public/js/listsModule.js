@@ -54,6 +54,7 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
   };
 
   $scope.saveItems = function () {
+    $scope.changeToClean();
     $scope.setSaveSortButtonDisplay(false, false);    
     var items = $scope.items.slice(0);
 	if (items[items.length-1].description.length === 0) { items.pop(); }
@@ -65,7 +66,6 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
         $scope.items = $scope.getItemsInPreviousOrder($scope.items.slice(0), data);
         $scope.items.push({ bondId: $scope.id, description: '', status: 'open', assignee: 0 });
         $scope.setSaveSortButtonDisplay(false, true);   
-        $scope.changeToClean();
         toaster.pop('success', '', 'Saved!');
       });
   };
