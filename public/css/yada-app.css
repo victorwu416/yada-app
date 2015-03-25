@@ -49,8 +49,11 @@
   border-color: #536267;
 }
 
-.lists .navbar .btn-group {
-  float: right;
+.lists .settings-link {
+  float: left;
+  margin-top: 14px;
+  margin-left: 10px;
+  color: white;
 }
 
 .lists .navbar .btn-group {

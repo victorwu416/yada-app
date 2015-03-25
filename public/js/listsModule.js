@@ -193,6 +193,7 @@ mainModule.controller('MarkAsDoneModalController',
 
   $scope.item = item;
   $scope.bond = listsControllerScope.bond;
+  $scope.currentPerson = listsControllerScope.currentPerson;
 });
 
 mainModule.controller('SendSmsReminderModalController',
