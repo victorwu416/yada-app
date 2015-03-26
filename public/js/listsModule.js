@@ -49,6 +49,7 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
   };
 
   $scope.saveItems = function (callback) {
+    $scope.showItemsLoadingSpinner = true;
     $scope.changeToClean();
     $scope.showSaveSortButtons = false;
     var items = $scope.items.slice(0);
@@ -60,6 +61,7 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
       .success(function (data, status, headers, config) {
         $scope.items = $scope.getItemsInPreviousOrder($scope.items.slice(0), data);
         $scope.items.push({ bondId: $scope.id, description: '', status: 'open', assignee: 0 });
+        $scope.showItemsLoadingSpinner = false;
         toaster.pop('success', '', 'Saved!');
         if (callback!==undefined) { callback(); }
       });
