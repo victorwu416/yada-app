@@ -83,6 +83,11 @@
   width: 100.5%;
 }
 
+.lists .panel-items .panel-items-btns {
+  margin-left: 14px;
+  margin-bottom: 10px;
+}
+
 .lists .assignee-0, .mark-as-done-modal .assignee-0, .send-sms-reminder-modal .assignee-0 {
   color: black;
 }
