@@ -68,7 +68,6 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
   };
   
   $scope.sortItems = function () {
-    $scope.showSaveSortButtons = false;
     $scope.saveItems(function () {
       $scope.getAndPopulateItems(function () {
         toaster.pop('warning', '', 'Sorted!');
