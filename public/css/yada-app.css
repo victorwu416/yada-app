@@ -30,10 +30,6 @@
   content: "\f0c7";
 }
 
-#toast-container > .toast-warning:before {
-  content: "\f160";
-}
-
 #toast-container > .toast-wait:before {
   content: "\f0a2";
 }

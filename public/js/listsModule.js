@@ -41,7 +41,7 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
   };
 
   $scope.onInputChange = function (index) {
-    $scope.showSaveSortButtons = true;
+    $scope.showPanelItemsButtons = true;
     $scope.itemsDirtiness[index] = true;
     if ($scope.items[$scope.items.length-1].description.length !== 0) {
       $scope.items.push({ bondId: $scope.id, description: '', status: 'open', assignee: 0 }); 
@@ -51,7 +51,7 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
   $scope.saveItems = function (callback) {
     $scope.showItemsLoadingSpinner = true;
     $scope.changeToClean();
-    $scope.showSaveSortButtons = false;
+    $scope.showPanelItemsButtons = false;
     var items = $scope.items.slice(0);
 	if (items[items.length-1].description.length === 0) { items.pop(); }
     $http.put('/api/items', items)
@@ -67,14 +67,6 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
       });
   };
   
-  $scope.sortItems = function () {
-    $scope.saveItems(function () {
-      $scope.getAndPopulateItems(function () {
-        toaster.pop('warning', '', 'Sorted!');
-      });
-    });
-  };
-
   $scope.openMarkAsDoneModal = function (item) {
     var modalInstance = $modal.open({
       templateUrl: 'partials/markAsDoneModal.html',
@@ -111,7 +103,7 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
         $scope.items = $scope.getItemsInSortedOrder(data);
         $scope.items.push({ bondId: $scope.id, description: '', status: 'open', assignee: 0 });
         $scope.showItemsLoadingSpinner = false;
-        $scope.showSaveSortButtons = false;
+        $scope.showPanelItemsButtons = false;
         $scope.changeToClean();
         if (callback!==undefined) { callback(); }
       });
