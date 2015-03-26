@@ -50,6 +50,40 @@
   <button type="button" class="btn btn-primary" ng-click="sortItems()" ng-show="showSortButton">
     <i class="fa fa-sort-amount-asc"></i> Sort
   </button>
+
+
+  <div class="panel panel-primary panel-messages">
+    <div class="panel-heading">
+      <i class="fa fa-comments-o"></i> <span>Conversation</span>
+      <span class="messages-refresh" ng-click="getAndPopulateMessages();" ng-hide="showMessagesLoadingSpinner">
+        <i class="fa fa-refresh"></i>
+      </span>
+      <span class="messages-refresh" ng-show="showMessagesLoadingSpinner">
+        <i class="fa fa-spinner fa-spin"></i>
+      </span>
+
+    </div>
+    <div class="panel-body">
+
+      <div class="input-group">
+        <input type="text" class="form-control" ng-model="newMessageBody" placeholder="New message" />
+        <span class="input-group-addon" ng-click="saveNewMessageAndRefreshMessages();" 
+              ng-show="newMessageBody.length!==0">
+          <i class="fa fa-send-o text-info"></i>
+        </span>  
+      </div>
+
+      <div class="message-line" ng-repeat="message in messages">
+        <span ng-class="{'assignee-1': message.person===1}">
+          <span ng-class="{'assignee-2': message.person===2}">
+            <i class="fa fa-circle assignee"></i>            
+        </span></span>
+        {{message.person===1 ? bond.name1 : bond.name2}}: {{message.body}}
+      </div>
+    </div>     
+
+  </div> <!-- panel -->
+
 </div>
 
 <toaster-container toaster-options="{'position-class': 'toast-top-center', 'time-out': 1500}"></toaster-container>

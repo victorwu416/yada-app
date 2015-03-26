@@ -34,11 +34,11 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
     if      (item0.description.toLowerCase() < item1.description.toLowerCase()) { return -1; }
     else if (item0.description.toLowerCase() > item1.description.toLowerCase()) { return 1; }
     return 0;    
-  }
+  };
 
   $scope.getItemsInSortedOrder = function (items) {
     return items.sort($scope.compareOnAssigneeAndDescription).slice(0);
-  }
+  };
 
   $scope.setSaveSortButtonDisplay = function(showSaveButton, showSortButton) {
     $scope.showSaveButton = showSaveButton;
@@ -75,7 +75,7 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
     $scope.getAndPopulateItems(function () {
       toaster.pop('warning', '', 'Sorted!');
     });
-  }
+  };
 
   $scope.openMarkAsDoneModal = function (item) {
     var modalInstance = $modal.open({
@@ -101,10 +101,9 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
         toaster: function () { return toaster; }
       }
     });
-  } 
+  }; 
 
   $scope.getAndPopulateItems = function (callback) {
-    $scope.id = $location.search().id;
     $http.get('/api/bonds/' + $scope.id + '/items')
       .error(function (data, status, headers, config) {
         console.log('Error getting Items for Bond with id: ' + $scope.id);
@@ -116,16 +115,44 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
         $scope.changeToClean();
         callback();
       });
-  }
+  };
 
   $scope.getAndPopulateBond = function () {
-    $scope.id = $location.search().id;
     $http.get('/api/bonds/' + $scope.id)
       .error(function (data, status, headers, config) {
         console.log('Error getting Bond with id: ' + $scope.id);
       })
       .success(function (data, status, headers, config) {
         $scope.bond = data;
+      });
+  };
+
+  $scope.saveNewMessageAndRefreshMessages = function () {
+    var newMessage = {
+      'bondId': $scope.id,
+      'person': $scope.currentPerson,
+      'body'  : $scope.newMessageBody
+    };
+    $scope.newMessageBody = '';
+    $http.post('/api/messages', newMessage)
+      .error(function (data, status, headers, config) {
+        console.log('Error posting Message');
+      })
+      .success(function (data, status, headers, config) {
+        $scope.getAndPopulateMessages();
+      });
+  }
+
+  $scope.getAndPopulateMessages = function () {
+    $scope.showMessagesLoadingSpinner = true;
+    $scope.newMessageBody = '';
+    $http.get('/api/bonds/' + $scope.id + '/messages')
+      .error(function (data, status, headers, config) {
+        console.log('Error getting Messages for Bond with id: ' + $scope.id);
+      })
+      .success(function (data, status, headers, config) {
+        $scope.messages = data;
+        $scope.showMessagesLoadingSpinner = false;
       });
   };
 
@@ -140,16 +167,20 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
     } else {
       return 2;
     }
-  }
+  };
  
   $scope.setStoredCurrentPerson = function (currentPerson) {
     if (currentPerson === 1) { localStorage.setItem('currentPerson', '1'); }
     else                     { localStorage.setItem('currentPerson', '2'); } 
-  }
+    $scope.currentPerson = currentPerson; 
+  };
 
+  $scope.id = $location.search().id;
   $scope.getAndPopulateItems(function() {});
   $scope.getAndPopulateBond();
   $scope.currentPerson = $scope.getStoredCurrentPerson();
+
+  $scope.getAndPopulateMessages();
 
 }]);
 

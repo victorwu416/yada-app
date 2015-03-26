@@ -91,6 +91,17 @@
   color: PaleVioletRed;
 }
 
+.lists .panel-messages .messages-refresh {
+  float: right;
+}
+
+.lists .panel-messages .message-line {
+  margin-top: 10px;
+}
+
+.lists .panel-messages .message-line:first-child {
+  margin-top: 0px;
+}
 
 /********** Settings **********/
 .settings .navbar {

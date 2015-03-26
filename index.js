@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 
 var bond = require('./services/bond')(app);
 var item = require('./services/item')(app);
+var message = require('./services/message')(app);
 var sms = require('./services/sms')(app);
 
 app.listen(app.get('port'), function() {
