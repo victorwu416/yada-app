@@ -24,7 +24,8 @@
     <div class="panel-body">
       <div ng-repeat="item in items">
         <div class="input-group" ng-show="item.status==='open'">
-          <span class="input-group-addon" ng-click="openMarkAsDoneModal(item)" ng-show="$last ? false : true">
+          <span class="input-group-addon" ng-click="openMarkAsDoneModal(item)" 
+                ng-show="$last ? false : true && !itemsDirtiness[$index]">
             <i class="fa fa-check text-success"></i>
           </span>
           <span class="input-group-addon" ng-show="$last ? false : true">
@@ -39,11 +40,11 @@
                  ng-model="item.description" placeholder="{{$last ? 'New item' : ''}}"
                  ng-change="onInputChange($index)" />
           <span class="input-group-addon" ng-click="saveItems()" 
-                ng-show="itemsDirtiness[$index]===true && item.description.length!==0">
+                ng-show="itemsDirtiness[$index] && item.description.length!==0">
             <i class="fa fa-floppy-o text-info"></i>
           </span>  
           <span class="input-group-addon" ng-click="openSendSmsReminderModal(item)" 
-                ng-show="itemsDirtiness[$index]===false && item.description.length!==0">
+                ng-show="!itemsDirtiness[$index] && item.description.length!==0">
             <i class="fa fa-comment-o text-info"></i>
           </span>            
         </div>
