@@ -104,6 +104,7 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
   }; 
 
   $scope.getAndPopulateItems = function (callback) {
+    $scope.showItemsLoadingSpinner = true;
     $http.get('/api/bonds/' + $scope.id + '/items')
       .error(function (data, status, headers, config) {
         console.log('Error getting Items for Bond with id: ' + $scope.id);
@@ -111,6 +112,7 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
       .success(function (data, status, headers, config) {
         $scope.items = $scope.getItemsInSortedOrder(data);
         $scope.items.push({ bondId: $scope.id, description: '', status: 'open', assignee: 0 });
+        $scope.showItemsLoadingSpinner = false;
         $scope.setSaveSortButtonDisplay(false, false);   
         $scope.changeToClean();
         callback();

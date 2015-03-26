@@ -66,6 +66,10 @@
   margin-top: 60px;
 }
 
+.lists .panel-items .items-refresh {
+  float: right;
+}
+
 .lists .panel-body .ng-scope .input-group {
   margin-top: 10px;
 }
