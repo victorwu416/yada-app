@@ -112,7 +112,7 @@ listsModule.controller('ListsController', ['$scope', '$location', '$http', '$mod
         $scope.showItemsLoadingSpinner = false;
         $scope.showSaveSortButtons = false;
         $scope.changeToClean();
-        callback();
+        if (callback!==undefined) { callback(); }
       });
   };
 
